@@ -1,0 +1,9 @@
+[] create HTML using image
+[] When submit clicked => take input and POST
+    [] create POST route
+[] When `C` clicked => clear input fields
+[] Compute operations on server side +,-,*,/
+[] Send back OK from POST
+[] GET request for result onto DOM
+[] list of previous calculations on DOM
+    [] update every time new calculation is made 
