@@ -1,7 +1,7 @@
 [x] create HTML using image
 [x] TEST each button has click listener
-[] when operator clicked, show hover
-    []create fx
+[x] when operator clicked, show hover
+    [x]create fx
         if: has class => remove class
         else: 
             if: class.length = 1 (one operator already selected)
