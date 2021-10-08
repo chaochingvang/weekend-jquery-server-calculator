@@ -1,5 +1,5 @@
 [x] create HTML using image
-[] TEST each button has click listener
+[x] TEST each button has click listener
 [] when operator clicked, show hover
     []create fx
         if: has class => remove class
