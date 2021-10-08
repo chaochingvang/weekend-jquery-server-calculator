@@ -1,8 +1,18 @@
-[] create HTML using image
-[] When submit clicked => take input and POST
-    [] create POST route
+[x] create HTML using image
+[] TEST each button has click listener
+[] when operator clicked, show hover
+    []create fx
+        if: has class => remove class
+        else: 
+            if: class.length = 1 (one operator already selected)
+                remove class from all btns
+                add class to selected btn
+            else: add class to selected btn
 [] When `C` clicked => clear input fields
-[] Compute operations on server side +,-,*,/
+[] When submit clicked => take input and POST
+    [] firstNum (operator with selected class) secondNum 
+    [] Compute operations on server side +,-,*,/
+    [] create POST route
 [] Send back OK from POST
 [] GET request for result onto DOM
 [] list of previous calculations on DOM
