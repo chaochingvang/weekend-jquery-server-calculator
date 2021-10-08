@@ -97,4 +97,6 @@ function calculateOperation() {
 
 function clearInputs() {
     console.log(`in clearInputs fx`);
+    $(`#firstNumInput`).val(``);
+    $(`#secondNumInput`).val(``);
 }
