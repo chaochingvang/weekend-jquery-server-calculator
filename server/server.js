@@ -12,10 +12,38 @@ app.listen(PORT, () => {
     console.log(`app running on PORT`, PORT);
 });
 
-let listOfCalc = [{calculation: `8 * 25`}];
+let listOfCalc = [];
 
 app.get(`/calculate`, (req, res) => {
     console.log(`/calculate GET`);
 
     res.send(listOfCalc);
+});
+
+app.post(`/calculate`, (req, res) => {
+    console.log(`/calculate POST`);
+
+    let input = req.body;
+
+
+    if (input.operator === `add`) {
+        input.result = Number(input.firstNum) + Number(input.secondNum);
+    }
+    else if (input.operator === `subtract`) {
+        input.result = Number(input.firstNum) - Number(input.secondNum);
+    }
+    else if (input.operator === `multiply`) {
+        input.result = Number(input.firstNum) * Number(input.secondNum);
+    }
+    else {
+        input.result = Number(input.firstNum) / Number(input.secondNum);
+    }
+
+    console.log(input);
+    
+    
+    listOfCalc.push(req.body);
+
+    res.sendStatus(201);
+
 });

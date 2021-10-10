@@ -93,7 +93,26 @@ function divideBtnSelected() {
 
 function calculateOperation() {
     console.log(`in calculateOperation fx`);
-    
+    $.ajax({
+        method: `POST`,
+        url: `/calculate`,
+        data: {
+            firstNum: $(`#firstNumInput`).val(),
+            operator:
+                $(`#addBtn`).hasClass(`selectedOperator`) ? `add`
+                    : $(`#subtractBtn`).hasClass(`selectedOperator`) ? `subtract` 
+                        : $(`#multiplyBtn`).hasClass(`selectedOperator`) ? `multiply`
+                            : $(`#divideBtn`).hasClass(`selectedOperator`) ? `divide`
+                                : ``,
+            secondNum: $(`#secondNumInput`).val(),
+            result: ``
+        }
+    }).then(function (response) {
+        console.log(`successful POST`, response);
+    }).catch(function (response) {
+        alert(`POST failed`, response);
+    })
+
 }
 
 function clearInputs() {
