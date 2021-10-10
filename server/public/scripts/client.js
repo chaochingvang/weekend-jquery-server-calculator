@@ -106,6 +106,16 @@ function divideBtnSelected() {
     }
 }
 
+function clearInputs() {
+    console.log(`in clearInputs fx`);
+    $(`#firstNumInput`).val(``);
+    $(`#secondNumInput`).val(``);
+    $(`#addBtn`).removeClass(`selectedOperator`);
+    $(`#subtractBtn`).removeClass(`selectedOperator`);
+    $(`#multiplyBtn`).removeClass(`selectedOperator`);
+    $(`#divideBtn`).removeClass(`selectedOperator`);
+}
+
 function getResults() {
     console.log(`in getResults fx`);
     $.ajax({
@@ -144,8 +154,3 @@ function calculateOperation() {
 
 }
 
-function clearInputs() {
-    console.log(`in clearInputs fx`);
-    $(`#firstNumInput`).val(``);
-    $(`#secondNumInput`).val(``);
-}
