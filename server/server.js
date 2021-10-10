@@ -25,7 +25,7 @@ app.post(`/calculate`, (req, res) => {
 
     let input = req.body;
 
-
+    //do calculations based on selected operator
     if (input.operator === `+`) {
         input.result = Number(input.firstNum) + Number(input.secondNum);
     }

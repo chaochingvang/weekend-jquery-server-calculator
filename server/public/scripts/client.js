@@ -14,11 +14,14 @@ function jqReady() {
 
 function renderToDOM(array) {
     console.log(`in renderToDOM`);
+    //empties the DOM
     $(`#historyContainer`).empty();
     $(`#resultsContainer`).empty();
 
+    //shows on DOM only the most recent result from listOfCalculations
     $(`#resultContainer`).text(`${array[array.length-1].result}`)
 
+    //shows on DOM all the calculations from listOfCalculations
     for (let calculations of array) {
         $(`#historyContainer`).append(`
             <li>${calculations.firstNum} ${calculations.operator} ${calculations.secondNum}</li>
@@ -28,10 +31,12 @@ function renderToDOM(array) {
 
 function addBtnSelected() {
     console.log(`in addBtnSelected fx`);
+    //if this btn is already selected, when clicked => deselect operator
     if ($(`#addBtn`).hasClass(`selectedOperator`)) {
         $(`#addBtn`).removeClass(`selectedOperator`);
     }
     else {
+        //if other btn is already selected, deselect other operators and select this btn
         if ($(`.selectedOperator`).length >= 1) {
             console.log(`in else`);
             $(`#addBtn`).removeClass(`selectedOperator`);
@@ -41,6 +46,7 @@ function addBtnSelected() {
             $(`#addBtn`).addClass(`selectedOperator`);
                 }
         else {
+            // if no button selected, select this button when clicked
             $(`#addBtn`).addClass(`selectedOperator`);
         }
     }
@@ -48,10 +54,12 @@ function addBtnSelected() {
 
 function subtractBtnSelected() {
     console.log(`in subtractBtnSelected fx`);
+    //if this btn is already selected, when clicked => deselect operator
     if ($(`#subtractBtn`).hasClass(`selectedOperator`)) {
         $(`#subtractBtn`).removeClass(`selectedOperator`);
     }
     else {
+        //if other btn is already selected, deselect other operators and select this btn
         if ($(`.selectedOperator`).length >= 1) {
             console.log(`in else`);
             $(`#addBtn`).removeClass(`selectedOperator`);
@@ -61,6 +69,7 @@ function subtractBtnSelected() {
             $(`#subtractBtn`).addClass(`selectedOperator`);
         }
         else {
+            // if no button selected, select this button when clicked
             $(`#subtractBtn`).addClass(`selectedOperator`);
         }
     }
@@ -68,10 +77,12 @@ function subtractBtnSelected() {
 
 function multiplyBtnSelected() {
     console.log(`in multiplyBtnSelected fx`);
+    //if this btn is already selected, when clicked => deselect operator
     if ($(`#multiplyBtn`).hasClass(`selectedOperator`)) {
         $(`#multiplyBtn`).removeClass(`selectedOperator`);
     }
     else {
+        //if other btn is already selected, deselect other operators and select this btn
         if ($(`.selectedOperator`).length >= 1) {
             console.log(`in else`);
             $(`#addBtn`).removeClass(`selectedOperator`);
@@ -81,6 +92,7 @@ function multiplyBtnSelected() {
             $(`#multiplyBtn`).addClass(`selectedOperator`);
         }
         else {
+            // if no button selected, select this button when clicked
             $(`#multiplyBtn`).addClass(`selectedOperator`);
         }
     }
@@ -88,10 +100,12 @@ function multiplyBtnSelected() {
 
 function divideBtnSelected() {
     console.log(`in divideBtnSelected fx`);
+    //if this operator btn is already selected, when clicked => deselect operator
     if ($(`#divideBtn`).hasClass(`selectedOperator`)) {
         $(`#divideBtn`).removeClass(`selectedOperator`);
     }
     else {
+        //if other btn is already selected, deselect other operators and select this btn
         if ($(`.selectedOperator`).length >= 1) {
             console.log(`in else`);
             $(`#addBtn`).removeClass(`selectedOperator`);
@@ -101,6 +115,7 @@ function divideBtnSelected() {
             $(`#divideBtn`).addClass(`selectedOperator`);
         }
         else {
+            // if no button selected, select this button when clicked
             $(`#divideBtn`).addClass(`selectedOperator`);
         }
     }
@@ -108,6 +123,7 @@ function divideBtnSelected() {
 
 function clearInputs() {
     console.log(`in clearInputs fx`);
+    // clears both number input fields and deselect any operators
     $(`#firstNumInput`).val(``);
     $(`#secondNumInput`).val(``);
     $(`#addBtn`).removeClass(`selectedOperator`);
@@ -137,6 +153,7 @@ function calculateOperation() {
         data: {
             firstNum: $(`#firstNumInput`).val(),
             operator:
+                // let .operator be the selected operator
                 $(`#addBtn`).hasClass(`selectedOperator`) ? `+`
                     : $(`#subtractBtn`).hasClass(`selectedOperator`) ? `-` 
                         : $(`#multiplyBtn`).hasClass(`selectedOperator`) ? `*`
