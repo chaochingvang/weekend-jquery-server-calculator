@@ -9,7 +9,22 @@ function jqReady() {
     $(`#divideBtn`).on(`click`, divideBtnSelected);
     $(`#equalBtn`).on(`click`, calculateOperation);
     $(`#clearBtn`).on(`click`, clearInputs);
+    getResults();
 }
+
+function renderToDOM(array) {
+    console.log(`in renderToDOM`);
+    $(`#historyContainer`).empty();
+    $(`#resultsContainer`).empty();
+
+    $(`#resultContainer`).text(`${array[array.length-1].result}`)
+
+    for (let calculations of array) {
+        $(`#historyContainer`).append(`
+            <li>${calculations.firstNum} ${calculations.operator} ${calculations.secondNum}</li>
+        `);
+    }
+} 
 
 function addBtnSelected() {
     console.log(`in addBtnSelected fx`);
@@ -91,6 +106,19 @@ function divideBtnSelected() {
     }
 }
 
+function getResults() {
+    console.log(`in getResults fx`);
+    $.ajax({
+        method: `GET`,
+        url: `/calculate`
+    }).then(function (response) {
+        console.log(`GET /calculate SUCCESS`);
+        renderToDOM(response);
+    }).catch(function (response) {
+        alert(`GET /calculate failed!`)
+    });
+}
+
 function calculateOperation() {
     console.log(`in calculateOperation fx`);
     $.ajax({
@@ -99,16 +127,17 @@ function calculateOperation() {
         data: {
             firstNum: $(`#firstNumInput`).val(),
             operator:
-                $(`#addBtn`).hasClass(`selectedOperator`) ? `add`
-                    : $(`#subtractBtn`).hasClass(`selectedOperator`) ? `subtract` 
-                        : $(`#multiplyBtn`).hasClass(`selectedOperator`) ? `multiply`
-                            : $(`#divideBtn`).hasClass(`selectedOperator`) ? `divide`
+                $(`#addBtn`).hasClass(`selectedOperator`) ? `+`
+                    : $(`#subtractBtn`).hasClass(`selectedOperator`) ? `-` 
+                        : $(`#multiplyBtn`).hasClass(`selectedOperator`) ? `*`
+                            : $(`#divideBtn`).hasClass(`selectedOperator`) ? `/`
                                 : ``,
             secondNum: $(`#secondNumInput`).val(),
             result: ``
         }
     }).then(function (response) {
-        console.log(`successful POST`, response);
+        console.log(`POST /calculate success`, response);
+        getResults();
     }).catch(function (response) {
         alert(`POST failed`, response);
     })

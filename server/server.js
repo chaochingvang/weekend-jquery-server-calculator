@@ -26,13 +26,13 @@ app.post(`/calculate`, (req, res) => {
     let input = req.body;
 
 
-    if (input.operator === `add`) {
+    if (input.operator === `+`) {
         input.result = Number(input.firstNum) + Number(input.secondNum);
     }
-    else if (input.operator === `subtract`) {
+    else if (input.operator === `-`) {
         input.result = Number(input.firstNum) - Number(input.secondNum);
     }
-    else if (input.operator === `multiply`) {
+    else if (input.operator === `*`) {
         input.result = Number(input.firstNum) * Number(input.secondNum);
     }
     else {
@@ -43,7 +43,7 @@ app.post(`/calculate`, (req, res) => {
     
     
     listOfCalc.push(req.body);
-
+    console.log(listOfCalc);
     res.sendStatus(201);
 
 });
