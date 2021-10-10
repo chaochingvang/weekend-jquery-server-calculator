@@ -93,6 +93,7 @@ function divideBtnSelected() {
 
 function calculateOperation() {
     console.log(`in calculateOperation fx`);
+    
 }
 
 function clearInputs() {

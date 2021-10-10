@@ -8,7 +8,7 @@
                 remove class from all btns
                 add class to selected btn
             else: add class to selected btn
-[] When `C` clicked => clear input fields
+[x] When `C` clicked => clear input fields
 [] When submit clicked => take input and POST
     [] firstNum (operator with selected class) secondNum 
     [] Compute operations on server side +,-,*,/
