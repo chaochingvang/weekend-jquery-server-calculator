@@ -1,22 +1,14 @@
 console.log(`js loaded`);
 $(jqReady);
 
-
-let userInput = `234+22`
-
-let result = (Function(`return ${ userInput }`))();
-console.log(result);
-
 function jqReady() {
     console.log(`jquery loaded`);
     $(`#calculatorGrid`).on(`click`, `button`, displayInputs)
-    $(`#addBtn`).on(`click`, addBtnSelected);
-    $(`#subtractBtn`).on(`click`, subtractBtnSelected);
-    $(`#multiplyBtn`).on(`click`, multiplyBtnSelected);
-    $(`#divideBtn`).on(`click`, divideBtnSelected);
     $(`#equalBtn`).on(`click`, calculateOperation);
     $(`#clearBtn`).on(`click`, clearInputs);
     getResults();
+
+
 }
 
 
@@ -25,10 +17,8 @@ function displayInputs() {
     let btnClicked = $(this).text();
     // If the button clicked is not an equal sign, 
     if (btnClicked !== `=`) {
-        // console.log(`not equal sign`);
         // nor a clear button
         if (btnClicked !== `C`) {
-            // console.log(`not clear btn`);
             //append the text of button onto DOM
             $(`#inputDisplay`).append(btnClicked);
         }
@@ -54,108 +44,11 @@ function renderToDOM(array) {
     }
 } 
 
-function addBtnSelected() {
-    console.log(`in addBtnSelected fx`);
-    //if this btn is already selected, when clicked => deselect operator
-    if ($(`#addBtn`).hasClass(`selectedOperator`)) {
-        $(`#addBtn`).removeClass(`selectedOperator`);
-    }
-    else {
-        //if other btn is already selected, deselect other operators and select this btn
-        if ($(`.selectedOperator`).length >= 1) {
-            console.log(`in else`);
-            $(`#addBtn`).removeClass(`selectedOperator`);
-            $(`#subtractBtn`).removeClass(`selectedOperator`);
-            $(`#multiplyBtn`).removeClass(`selectedOperator`);
-            $(`#divideBtn`).removeClass(`selectedOperator`);
-            $(`#addBtn`).addClass(`selectedOperator`);
-                }
-        else {
-            // if no button selected, select this button when clicked
-            $(`#addBtn`).addClass(`selectedOperator`);
-        }
-    }
-}
-
-function subtractBtnSelected() {
-    console.log(`in subtractBtnSelected fx`);
-    //if this btn is already selected, when clicked => deselect operator
-    if ($(`#subtractBtn`).hasClass(`selectedOperator`)) {
-        $(`#subtractBtn`).removeClass(`selectedOperator`);
-    }
-    else {
-        //if other btn is already selected, deselect other operators and select this btn
-        if ($(`.selectedOperator`).length >= 1) {
-            console.log(`in else`);
-            $(`#addBtn`).removeClass(`selectedOperator`);
-            $(`#subtractBtn`).removeClass(`selectedOperator`);
-            $(`#multiplyBtn`).removeClass(`selectedOperator`);
-            $(`#divideBtn`).removeClass(`selectedOperator`);
-            $(`#subtractBtn`).addClass(`selectedOperator`);
-        }
-        else {
-            // if no button selected, select this button when clicked
-            $(`#subtractBtn`).addClass(`selectedOperator`);
-        }
-    }
-}
-
-function multiplyBtnSelected() {
-    console.log(`in multiplyBtnSelected fx`);
-    //if this btn is already selected, when clicked => deselect operator
-    if ($(`#multiplyBtn`).hasClass(`selectedOperator`)) {
-        $(`#multiplyBtn`).removeClass(`selectedOperator`);
-    }
-    else {
-        //if other btn is already selected, deselect other operators and select this btn
-        if ($(`.selectedOperator`).length >= 1) {
-            console.log(`in else`);
-            $(`#addBtn`).removeClass(`selectedOperator`);
-            $(`#subtractBtn`).removeClass(`selectedOperator`);
-            $(`#multiplyBtn`).removeClass(`selectedOperator`);
-            $(`#divideBtn`).removeClass(`selectedOperator`);
-            $(`#multiplyBtn`).addClass(`selectedOperator`);
-        }
-        else {
-            // if no button selected, select this button when clicked
-            $(`#multiplyBtn`).addClass(`selectedOperator`);
-        }
-    }
-}
-
-function divideBtnSelected() {
-    console.log(`in divideBtnSelected fx`);
-    //if this operator btn is already selected, when clicked => deselect operator
-    if ($(`#divideBtn`).hasClass(`selectedOperator`)) {
-        $(`#divideBtn`).removeClass(`selectedOperator`);
-    }
-    else {
-        //if other btn is already selected, deselect other operators and select this btn
-        if ($(`.selectedOperator`).length >= 1) {
-            console.log(`in else`);
-            $(`#addBtn`).removeClass(`selectedOperator`);
-            $(`#subtractBtn`).removeClass(`selectedOperator`);
-            $(`#multiplyBtn`).removeClass(`selectedOperator`);
-            $(`#divideBtn`).removeClass(`selectedOperator`);
-            $(`#divideBtn`).addClass(`selectedOperator`);
-        }
-        else {
-            // if no button selected, select this button when clicked
-            $(`#divideBtn`).addClass(`selectedOperator`);
-        }
-    }
-}
 
 function clearInputs() {
     console.log(`in clearInputs fx`);
     $(`#inputDisplay`).text(``);
-    // clears both number input fields and deselect any operators
-    $(`#firstNumInput`).val(``);
-    $(`#secondNumInput`).val(``);
-    $(`#addBtn`).removeClass(`selectedOperator`);
-    $(`#subtractBtn`).removeClass(`selectedOperator`);
-    $(`#multiplyBtn`).removeClass(`selectedOperator`);
-    $(`#divideBtn`).removeClass(`selectedOperator`);
+    $(`button`).removeClass(`selectedOperator`)
 }
 
 function getResults() {
@@ -173,28 +66,24 @@ function getResults() {
 
 function calculateOperation() {
     console.log(`in calculateOperation fx`);
-    $.ajax({
-        method: `POST`,
-        url: `/calculate`,
-        data: {
-            firstNum: $(`#firstNumInput`).val(),
-            operator:
-                // let .operator be the selected operator
-                $(`#addBtn`).hasClass(`selectedOperator`) ? `+`
-                    : $(`#subtractBtn`).hasClass(`selectedOperator`) ? `-` 
-                        : $(`#multiplyBtn`).hasClass(`selectedOperator`) ? `*`
-                            : $(`#divideBtn`).hasClass(`selectedOperator`) ? `/`
-                                : ``,
-            secondNum: $(`#secondNumInput`).val(),
-            inputString: $(`#inputDisplay`).text(),
-            result: ``
-        }
-    }).then(function (response) {
-        console.log(`POST /calculate success`, response);
-        getResults();
-    }).catch(function (response) {
-        alert(`POST failed`, response);
-    })
+    if ($(`#inputDisplay`).text() === '') {
+        alert(`MUST ENTER INPUT`)
+    }
+    else {
+        $.ajax({
+            method: `POST`,
+            url: `/calculate`,
+            data: {
+                inputString: $(`#inputDisplay`).text(),
+                result: ``
+            }
+        }).then(function (response) {
+            console.log(`POST /calculate success`, response);
+            getResults();
+        }).catch(function (response) {
+            alert(`POST failed`, response);
+        })
+    }
 
 }
 
