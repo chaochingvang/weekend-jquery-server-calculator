@@ -65,24 +65,27 @@ function getResults() {
 
 function calculateOperation() {
     console.log(`in calculateOperation fx`);
-    if ($(`#inputDisplay`).text() === '') {
-        alert(`MUST ENTER INPUT`)
+    switch ($(`#inputDisplay`).text().charAt(0)) {
+        case '':
+            alert(`MUST ENTER INPUT`);
+            break;
+        case '*':
+        case '/':
+            alert(`Cannot start with an operator`);
+            break;
+        default:
+            $.ajax({
+                method: `POST`,
+                url: `/calculate`,
+                data: {
+                    inputString: $(`#inputDisplay`).text(),
+                    result: ``
+                }
+            }).then(function (response) {
+                console.log(`POST /calculate success`, response);
+                getResults();
+            }).catch(function (response) {
+                alert(`POST failed`, response);
+            })
     }
-    else {
-        $.ajax({
-            method: `POST`,
-            url: `/calculate`,
-            data: {
-                inputString: $(`#inputDisplay`).text(),
-                result: ``
-            }
-        }).then(function (response) {
-            console.log(`POST /calculate success`, response);
-            getResults();
-        }).catch(function (response) {
-            alert(`POST failed`, response);
-        })
-    }
-
 }
-
