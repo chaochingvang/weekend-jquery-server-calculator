@@ -48,7 +48,6 @@ function renderToDOM(array) {
 function clearInputs() {
     console.log(`in clearInputs fx`);
     $(`#inputDisplay`).text(``);
-    $(`button`).removeClass(`selectedOperator`)
 }
 
 function getResults() {
