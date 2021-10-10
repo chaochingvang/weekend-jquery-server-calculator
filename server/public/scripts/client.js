@@ -16,12 +16,11 @@ function jqReady() {
 function displayInputs() {
     let btnClicked = $(this).text();
     // If the button clicked is not an equal sign, 
-    if (btnClicked !== `=`) {
-        // nor a clear button
-        if (btnClicked !== `C`) {
-            //append the text of button onto DOM
-            $(`#inputDisplay`).append(btnClicked);
-        }
+    switch (btnClicked) {
+        case `=`:
+        case `C`:
+            break;
+        default: $(`#inputDisplay`).append(btnClicked);
     }
 }
 
@@ -85,7 +84,7 @@ function calculateOperation() {
                 console.log(`POST /calculate success`, response);
                 getResults();
             }).catch(function (response) {
-                alert(`POST failed`, response);
+                alert(`POST failed! Unable to calculate.`, response);
             })
     }
 }
