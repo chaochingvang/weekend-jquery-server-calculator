@@ -18,8 +18,10 @@ function renderToDOM(array) {
     $(`#historyContainer`).empty();
     $(`#resultsContainer`).empty();
 
-    //shows on DOM only the most recent result from listOfCalculations
-    $(`#resultContainer`).text(`${array[array.length-1].result}`)
+    //if there are calculations, show on DOM only the most recent result from listOfCalculations
+    if (array.length > 0) {
+        $(`#resultContainer`).text(`${array[array.length - 1].result}`);
+    }
 
     //shows on DOM all the calculations from listOfCalculations
     for (let calculations of array) {

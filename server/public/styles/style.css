@@ -1,3 +1,15 @@
 .selectedOperator {
     background-color: deepskyblue;
 }
+
+#inputDisplay {
+    empty-cells: show;
+    border: 1px solid black;
+    width: 150px;
+    column-count: 3;
+}
+
+button {
+    width: 50px;
+    height: 50px;
+}

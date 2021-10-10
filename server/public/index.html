@@ -13,14 +13,58 @@
 
     <h1>Server Side Calculator</h1>
 
-    <input type="number" id="firstNumInput">
-    <button id="addBtn">+</button>
-    <button id="subtractBtn">-</button>
-    <button id="multiplyBtn">*</button>
-    <button id="divideBtn">/</button>
-    <input type="number" id="secondNumInput">
-    <button id="equalBtn">=</button>
-    <button id="clearBtn">C</button>
+    <div>
+        <table>
+
+        </table>
+
+    </div>
+
+    <div id="calculatorGrid">
+        <table>
+            <tbody>
+                <tr>
+                    <td id="inputDisplay" colspan="3"></td>
+                    <td><button id="clearBtn">C</button></td>
+                </tr>
+                <tr>
+                    <td><button>7</button></td>
+                    <td><button>8</button></td>
+                    <td><button>9</button></td>
+                    <td><button id="addBtn">+</button></td>
+                </tr>
+                <tr>
+                    <td><button>4</button></td>
+                    <td><button>5</button></td>
+                    <td><button>6</button></td>
+                    <td><button id="subtractBtn">-</button></td>
+                </tr>
+                <tr>
+                    <td><button>1</button></td>
+                    <td><button>2</button></td>
+                    <td><button>3</button></td>
+                    <td><button id="multiplyBtn">*</button></td>
+                </tr>
+                <tr>
+                    <td><button>0</button></td>
+                    <td><button>.</button></td>
+                    <td><button id="equalBtn">=</button></td>
+                    <td><button id="divideBtn">/</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <input type="number" id="firstNumInput">
+        <!-- <button id="addBtn">+</button>
+        <button id="subtractBtn">-</button>
+        <button id="multiplyBtn">*</button>
+        <button id="divideBtn">/</button> -->
+        <input type="number" id="secondNumInput">
+        <!-- <button id="equalBtn">=</button> -->
+        <!-- <button id="clearBtn">C</button> -->
+    </div>
 
     <div><h2 id="resultContainer"></h2></div>
 
