@@ -1,8 +1,15 @@
 console.log(`js loaded`);
 $(jqReady);
 
+
+let userInput = `234+22`
+
+let result = (Function(`return ${ userInput }`))();
+console.log(result);
+
 function jqReady() {
     console.log(`jquery loaded`);
+    $(`#calculatorGrid`).on(`click`, `button`, displayInputs)
     $(`#addBtn`).on(`click`, addBtnSelected);
     $(`#subtractBtn`).on(`click`, subtractBtnSelected);
     $(`#multiplyBtn`).on(`click`, multiplyBtnSelected);
@@ -10,6 +17,22 @@ function jqReady() {
     $(`#equalBtn`).on(`click`, calculateOperation);
     $(`#clearBtn`).on(`click`, clearInputs);
     getResults();
+}
+
+
+//append to the DOM whichever button is clicked as a string
+function displayInputs() {
+    let btnClicked = $(this).text();
+    // If the button clicked is not an equal sign, 
+    if (btnClicked !== `=`) {
+        // console.log(`not equal sign`);
+        // nor a clear button
+        if (btnClicked !== `C`) {
+            // console.log(`not clear btn`);
+            //append the text of button onto DOM
+            $(`#inputDisplay`).append(btnClicked);
+        }
+    }
 }
 
 function renderToDOM(array) {
@@ -26,7 +49,7 @@ function renderToDOM(array) {
     //shows on DOM all the calculations from listOfCalculations
     for (let calculations of array) {
         $(`#historyContainer`).append(`
-            <li>${calculations.firstNum} ${calculations.operator} ${calculations.secondNum}</li>
+            <li>${calculations.inputString}</li>
         `);
     }
 } 
@@ -125,6 +148,7 @@ function divideBtnSelected() {
 
 function clearInputs() {
     console.log(`in clearInputs fx`);
+    $(`#inputDisplay`).text(``);
     // clears both number input fields and deselect any operators
     $(`#firstNumInput`).val(``);
     $(`#secondNumInput`).val(``);
@@ -162,6 +186,7 @@ function calculateOperation() {
                             : $(`#divideBtn`).hasClass(`selectedOperator`) ? `/`
                                 : ``,
             secondNum: $(`#secondNumInput`).val(),
+            inputString: $(`#inputDisplay`).text(),
             result: ``
         }
     }).then(function (response) {

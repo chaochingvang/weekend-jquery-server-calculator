@@ -6,7 +6,6 @@
     empty-cells: show;
     border: 1px solid black;
     width: 150px;
-    column-count: 3;
 }
 
 button {

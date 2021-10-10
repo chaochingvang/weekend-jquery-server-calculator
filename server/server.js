@@ -25,19 +25,24 @@ app.post(`/calculate`, (req, res) => {
 
     let input = req.body;
 
+
+//OLD CODE! CODE before doing calculator grid with displayInput    
     //do calculations based on selected operator
-    if (input.operator === `+`) {
-        input.result = Number(input.firstNum) + Number(input.secondNum);
-    }
-    else if (input.operator === `-`) {
-        input.result = Number(input.firstNum) - Number(input.secondNum);
-    }
-    else if (input.operator === `*`) {
-        input.result = Number(input.firstNum) * Number(input.secondNum);
-    }
-    else {
-        input.result = Number(input.firstNum) / Number(input.secondNum);
-    }
+    // if (input.operator === `+`) {
+    //     input.result = Number(input.firstNum) + Number(input.secondNum);
+    // }
+    // else if (input.operator === `-`) {
+    //     input.result = Number(input.firstNum) - Number(input.secondNum);
+    // }
+    // else if (input.operator === `*`) {
+    //     input.result = Number(input.firstNum) * Number(input.secondNum);
+    // }
+    // else {
+    //     input.result = Number(input.firstNum) / Number(input.secondNum);
+    // }
+
+    //input.result equals the function of the inputString. returns the value of the calculation of string
+    input.result = Function(`return ${input.inputString}`)();
 
     console.log(input);
     
